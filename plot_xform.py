@@ -20,7 +20,7 @@ def getObjectAsJson(bucket, key):
         if (len(plot['x_values']) != len(plot['y_values'])):
             raise Exception("Plot data mismatch")
 
-        return plot
+        return { 'x': plot['x_values'], 'y': plot['y_values'], 'type': 'line', 'name': key}
     except:
         return None
 
