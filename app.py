@@ -26,32 +26,27 @@ app.layout = html.Div(children=[
             Live Data Aggregation
         '''),
     dcc.Graph(
-            id='example-graph',
-            figure={
-                #'data': [
-                #    {'x': ['left', 'center', 'right'], 'y': [3,7,6], 'type': 'line', 'name': 'category 1'},
-                #    {'x': ['left', 'center', 'right'], 'y': [4,2,5], 'type': 'line', 'name': 'category 2'},
-                #],
-		'data':  getJSONObject(BUCKET_ARN, 'unused'),
-                'layout': {
-                    'plot_bgcolor': 'lightgray',
-                    'title': 'Collected from ' + BUCKET_ARN,
-                    'xaxis':{'title':'x_values'},
-                    'yaxis':{'title':'y_values'},
-                },
-            }
-        ),
+            id='example-graph'),
     dcc.Interval(
             id='interval-component',
-            interval=1*1000,
+            interval=5*1000,
             n_intervals=0
     )
 ])
 
-#@app.callback(Output('example-graph', 'figure'),
-#	          Input('interval-component', 'n_intervals'))
-#def update_plot(n):
-
+@app.callback(Output('example-graph', 'figure'),
+	          Input('interval-component', 'n_intervals'))
+def update_plot(n):
+    new_figure={
+		'data':  getJSONObject(BUCKET_ARN, 'unused'),
+        'layout': {
+            'plot_bgcolor': 'lightgray',
+            'title': 'Collected from ' + BUCKET_ARN,
+            'xaxis':{'title':'x_values'},
+            'yaxis':{'title':'y_values'},
+        },
+    }
+    return new_figure
 
 ########### Run the app
 if __name__ == '__main__':
