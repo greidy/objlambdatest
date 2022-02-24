@@ -8,8 +8,8 @@ import json
 BUCKET_ARN = "arn:aws:s3-object-lambda:us-east-2:650805712162:accesspoint/dg-tri-challenge-lambda-access-point"
 # This is a READ-ONLY key, not secret for the purpose of this exercise
 s3 = boto3.client('s3',
-                  aws_access_key_id='AKIAZPBYLCURKJ3G67ML',
-                  aws_secret_access_key='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')
+                  aws_access_key_id='XXXXXXXXXXXXXXXXXXXX',
+                  aws_secret_access_key='XXXXXXXXXXXXXXXXXXXX')
 
 def getJSONObject(bucket, key):
     objectBody = s3.get_object(Bucket = bucket, Key = key)
